@@ -6,14 +6,11 @@ import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom
 import FavBar from "./components_searchHome/FavBar";
 import NavBarOpener from "./components_sidebar/NavBarOpener";
 import DropDown from "./components_searchHome/DropDown";
-// import Banner from "./components/Banner"
 
 import Favorites from "./containers/Favorites";
 import Profile from "./containers/Profile";
 import Statistics from "./containers/Statistics";
 
-
-// import SearchBar from "./components_searchHome/SearchBar";
 import ModalContainer from "./components_sidebar/ModalContainer";
 import SearchHome from "./containers/SearchHome";
 import twitteraccounts from "./components_favorites/TwitterAccts";
@@ -27,210 +24,102 @@ class App extends React.Component {
       entered: false,
       tweets: [],
       show: false,
-      logged_in: true,
+      logged_in: false,
       user: {
-        username: "CookieMonster",
-        name: "Oreo the Cookie",
-        password: "test",
-        id: 1
+        // username: "CookieMonster",
+        // name: "Oreo the Cookie",
+        // password: "test",
+        // id: 1
       },
       favorites: [
-        {
-          name: "Lady Gaga",
-          twitter_account_id: "@BarackObama"
-        },
-        {
-          name: "Katy Perry",
-          twitter_account_id: "@katyperry"
-        },
-        {
-          name: "Tom Holland",
-          twitter_account_id: "@justinbieber"
-        }
+        // {
+        //   name: "Lady Gaga",
+        //   twitter_account_id: "@BarackObama"
+        // },
+        // {
+        //   name: "Katy Perry",
+        //   twitter_account_id: "@katyperry"
+        // },
+        // {
+        //   name: "Tom Holland",
+        //   twitter_account_id: "@justinbieber"
+        // }
       ], 
       tweets: [
-        {
-          content: "Fame is prison",
-          celeb_username: "ladygaga",
-          // sentiment1(DeepAI): Neutral,
-          sentiment2: "Positive"
-          // sentiment3(MicroSoft): Positive 95%
-        },
-        {
-          content: "Thank you @AMAs goo.gle/AMAsVote",
-          celeb_username: "ladygaga",
-          // sentiment1(DeepAI): Negative,
-          sentiment2: "Neutral"
-          // sentiment3(Microsoft): Positive 90%
-        },
-        {
-          content:
-            "David Beckham and me for #TudorWatch. Full video out 10/30 #BornToDare",
-          celeb_username: "ladygaga",
-          // sentiment1(DeepAI): Neutral(2),
-          sentiment2: "Positive"
-          // sentiment3(Microsoft): Neutral 50%
-        },
-        {
-          content:
-            "Thank you @NYAMNYC for honoring @BTWFoundation with your Bold and Brave award for our work in supporting the mental and emotional wellness of young people. @momgerm",
-          celeb_username: "ladygaga",
-          // sentiment1(DeepAI): Positive, Neutral,
-          sentiment2: "Positive"
-          // sentiment3(Microsoft): Positive 97%
-        },
-        {
-          content: "Jazz & Piano at @ParkTheaterLV tonight #GagaVegas",
-          celeb_username: "ladygaga",
-          // sentiment1(DeepAI): Neutral,
-          sentiment2: "Positive"
-          // sentiment3(Microsoft): Neutral 50%
-        },
-        {
-          content: "Lokah Samstah Sukhino Bhavantu",
-          celeb_username: "ladygaga",
-          // sentiment1(DeepAI): Neutral,
-          sentiment2: "Positive"
-          // sentiment3(Microsoft): Neutral 50%
-        },
-        {
-          content:
-            "When they have to X-Ray almost your entire body…Just Dance. Gonna be ok.",
-          celeb_username: "ladygaga",
-          // sentiment1(DeepAI): Neutral, Negative,
-          sentiment2: "Neutral"
-          // sentiment3(Microsoft): Negative 24%
-        },
-        {
-          content: 
-            "When they have to X-Ray almost your entire body…Just Dance. Gonna be ok.",
-          celeb_username: "ladygaga",
-          // sentiment1(DeepAI): Neutral, Negative,
-          sentiment2:  "Neutral"
-          // sentiment3(Microsoft): Negative 24%},
-        }],
-      
-  // ​
         // {
-        //   content:
-        //     "#TBT to some v rare BTS of @charlieputh and I putting those final grooves into #HarleysInHawaii katy.to/harleysinhawaii",
-        //   celeb_username: "Katy Perry",
-        //   // sentiment1(DeepAI): Negative,
-        //   sentiment2: "Neutral"
-        //   // sentiment3(Microsoft): Neutral 50%
-        // },
-        // {
-        //   content: "#ASMR #HarleysInHawaii katy.to/HarleysASMR",
-        //   celeb_username: "Katy Perry",
-        //   // sentiment1(DeepAI): Negative,
-        //   sentiment2: "Neutral"
-        //   // sentiment3(Microsoft): Neutral 50%
-        // },
-        // {
-        //   content:
-        //     "Who goes from a motorcycle license test straight to a music video set? #HarleysInHawaii katy.to/hivideo",
-        //   celeb_username: "Katy Perry",
-        //   // sentiment1(DeepAI): Neutral(2),
-        //   sentiment2: "Neutral"
-        //   // sentiment3(Microsoft): Neutral 50%
-        // },
-        // {
-        //   content:
-        //     "Got you Swerve-in' lane to lane #ShoesdayTuesday @kpcollections katyperrycollections.com/search?q=Swerve",
-        //   celeb_username: "Katy Perry",
-        //   // sentiment1(DeepAI): Negative,
-        //   sentiment2: "Negative"
-        //   // sentiment3(Microsoft): Neutral 50%
-        // },
-        // {
-        //   content:
-        //     "Me at the beginning of the weekend vs. at the end of the weekend #HarleysInHawaii",
-        //   celeb_username: "Katy Perry",
+        //   content: "Fame is prison",
+        //   celeb_username: "ladygaga",
         //   // sentiment1(DeepAI): Neutral,
+        //   sentiment2: "Positive"
+        //   // sentiment3(MicroSoft): Positive 95%
+        // },
+        // {
+        //   content: "Thank you @AMAs goo.gle/AMAsVote",
+        //   celeb_username: "ladygaga",
+        //   // sentiment1(DeepAI): Negative,
         //   sentiment2: "Neutral"
-        //   // sentiment3(Microsoft): Neutral 50%
+        //   // sentiment3(Microsoft): Positive 90%
         // },
         // {
         //   content:
-        //     "There's pink and purple in the sky. Have you seen it? katy.to/hihvideo #HarleysInHawaii",
-        //   celeb_username: "Katy Perry",
-        //   // sentiment1(DeepAI): Neutral(3),
-        //   sentiment2: "Neutral"
-        //   // sentiment3(Microsoft): Neutral 50%
-        // },
-        // {
-        //   content: "out week…Why don't we get out of town?! #HarleysInHawaii",
-        //   celeb_username: "Katy Perry",
+        //     "David Beckham and me for #TudorWatch. Full video out 10/30 #BornToDare",
+        //   celeb_username: "ladygaga",
         //   // sentiment1(DeepAI): Neutral(2),
         //   sentiment2: "Positive"
         //   // sentiment3(Microsoft): Neutral 50%
         // },
         // {
         //   content:
-        //     "S/O to my favorite pizza joint in Kauai - Tahiti Nui's - for letting us take over. This is the only place I will allow pineapple on my pizza katy.to/hihvideo",
-        //   celeb_username: "Katy Perry",
-        //   // sentiment1(DeepAI): Positive, Negative,
+        //     "Thank you @NYAMNYC for honoring @BTWFoundation with your Bold and Brave award for our work in supporting the mental and emotional wellness of young people. @momgerm",
+        //   celeb_username: "ladygaga",
+        //   // sentiment1(DeepAI): Positive, Neutral,
+        //   sentiment2: "Positive"
+        //   // sentiment3(Microsoft): Positive 97%
+        // },
+        // {
+        //   content: "Jazz & Piano at @ParkTheaterLV tonight #GagaVegas",
+        //   celeb_username: "ladygaga",
+        //   // sentiment1(DeepAI): Neutral,
+        //   sentiment2: "Positive"
+        //   // sentiment3(Microsoft): Neutral 50%
+        // },
+        // {
+        //   content: "Lokah Samstah Sukhino Bhavantu",
+        //   celeb_username: "ladygaga",
+        //   // sentiment1(DeepAI): Neutral,
+        //   sentiment2: "Positive"
+        //   // sentiment3(Microsoft): Neutral 50%
+        // },
+        // {
+        //   content:
+        //     "When they have to X-Ray almost your entire body…Just Dance. Gonna be ok.",
+        //   celeb_username: "ladygaga",
+        //   // sentiment1(DeepAI): Neutral, Negative,
         //   sentiment2: "Neutral"
-        //   // sentiment3(Microsoft): Positive 75%}
-        // }],
-  //       {
-  //         content: "Thanks babe.",
-  //         celeb_username: "Tom Holland",
-  //         // sentiment1(DeepAI): Positive, Negative,
-  //         sentiment2: 55.6
-  //         // sentiment3(Microsoft): Positive 75%}
-  //       },
-  //       {
-  //         content: "I taught Tess that trick 😂",
-  //         celeb_username: "Tom Holland",
-  //         // sentiment1(DeepAI): Positive, Negative,
-  //         sentiment2: 55.6
-  //         // sentiment3(Microsoft): Positive 75%}
-  //       }
-  //     ]
+        //   // sentiment3(Microsoft): Negative 24%
+        // },
+        // {
+        //   content: 
+        //     "When they have to X-Ray almost your entire body…Just Dance. Gonna be ok.",
+        //   celeb_username: "ladygaga",
+        //   // sentiment1(DeepAI): Neutral, Negative,
+        //   sentiment2:  "Neutral"
+        //   // sentiment3(Microsoft): Negative 24%},
+        // }
+      ],
       selectedAcc: {name: "", twitterHandle: ""}, //twitteraccount
       navBarShow: false,
       
       top10: [
         twitteraccounts
-        // {
-        //   key: "Barack Obama",
-        //   text: "Barack Obama",
-        //   value: "@BarackObama"
-        // },
-        // {
-        //   key: "Katy Perry",
-        //   text: "Katy Perry",
-        //   value: "@katyperry"
-        // },
-        // {
-        //   key: "Justin Bieber",
-        //   text: "Justin Bieber",
-        //   value: "@justinbieber"
-        // }
       ]
     };
   }
 
   //change this to not be rendered upon sign in;
   // this function can be used for rendering favorites as well
-  generateAllTweets = () => {
-    fetch("http://localhost:3000/allcelebs", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.token}`
-      }
-    })
-      .then(resp => resp.json())
-      .then(data => this.setState({ top10: [...this.state.top10, data] }))
-      // .then(data => console.log(data))
-      //.then map to put correct proper format (on front or back end?)
-      // .then(data => this.setState({ top10: [...data] }));
-      // .then(data => this.setState({ top10: data }));
-  };
 
   addToFavorites = (name, id) => {
-    //***************
     let favoriteTweeters = this.state.favorites;
     let favorite = {name: name, twitter_account_id: id}
 
@@ -247,9 +136,6 @@ class App extends React.Component {
   //change this to not be rendered upon sign in;
   // this function can be used for rendering favorites as well
 
-
-
-
   showModal = () => {
     this.setState({
       show: !this.state.show
@@ -257,19 +143,18 @@ class App extends React.Component {
   };
 
   getLoggedIn = json => {
-    // console.log("initiated sign in fetch");
-    // fetch("http://localhost:3000/profile", {
-    //   method: "GET",
-    //   headers: {
-    //     Authorization: `Bearer ${localStorage.token}`
-    //   }
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.setState(prevState => {
-    //       return { logged_in: true, user: data.user };
-    //     });
-    //   });
+    fetch("http://localhost:3000/", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState(prevState => {
+          return { logged_in: true, user: data.user };
+        });
+      });
     this.setState({
       logged_in: true
     })
@@ -288,43 +173,27 @@ class App extends React.Component {
   updateSelectedAcc = async (name, account) => {
     await this.setState({
       selectedAcc: { name: name, twitterHandle: account }
-    });
-  };
-
-  deleteFav = e => {
-    //********* RECEIVE ALL FAVS of USER as RETURNED DATA
-    // fetch(Url + e.id {
-    //   method: 'DELETE',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Accept: 'application/json'
-    //   }
-    // })
-    // .then(resp => resp.json())
-    // .then(data => {
-    //   this.setData({
-    //     favorites: data
-    //   })
-    // })
-  };
-
-  addFav = e => {
-    // const user_id = this.state.user.id
-    // const twitter_account_id = e.target.id
-    ////////double check on the e.target.id to match twitteracc id.
-    // fetch(Url, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         Accept: 'application/json'
-    //     },
-    //     body: JSON.stringify({ user_id, twitter_account_id })
-    // })
-    // .then(resp => resp.json())
-    // .then(data => {
-    //   this.setState({
-    //    favorites: [...this.state.favorites, data]
-    // })})
+    })
+    .then(
+      fetch("http://localhost:3000/celebs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        // Authorization: `Bearer ${localStorage.token}`
+      },
+      body: JSON.stringify({ celebrity: celeb })
+    })
+    .then(response => response.json())
+    // .then()
+    .then(data => {
+      data.map( obj => {
+        this.setState({
+          
+        })
+      })
+    }) 
+    );
   };
 
   toggleNav = () => {
@@ -361,40 +230,20 @@ class App extends React.Component {
     );
   };
 
-  searchTwitter = celeb => {
-    // console.log("signed in as:", this.state.user);
-    // console.log("local storage token", localStorage.token);
-    // console.log("began fetchtwitter on front end-should go to /celebs");
-    // return fetch("http://localhost:3000/celebs", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //     Authorization: `Bearer ${localStorage.token}`
-    //   },
-    //   body: JSON.stringify({ celebrity: celeb })
-    // })
-    // .then(response => response.json())
-    // // .then()
-    // .then(data => {
-    //   data.map( obj => {
-    //     this.setState({
-          
-    //     })
-    //   })
-    // })
-    // .then(data => {
-    //   this.setState({
-    //     tweets: data
-    //   });
-    // });
+  getTwitterIds = celeb => {
+    fetch("http://localhost:3000/allcelebs", {
+      method: "GET"
+    })
+      .then(resp => resp.json())
+      .then(data => this.setState({ top10: [...this.state.top10, data] }))
+
+
+    return 
   };
 
-  toggleEnter = () => {
-    this.setState({
-      entered: true
-    });
-  };
+  componentDidMount() {
+    this.getTwitterIds();
+  }
 
   entered = () => {
     return (
@@ -405,9 +254,9 @@ class App extends React.Component {
         <DropDown
           top10={this.state.top10}
           top10={this.state.top10}
-          searchTwitter={this.searchTwitter}
+          getTwitterIds={this.getTwitterIds}
         />
-        <DropDown top10={this.state.top10} searchTwitter={this.searchTwitter} />
+        <DropDown top10={this.state.top10}   getTwitterIds={thisgetTwitterIds} />
       </React.Fragment>
     );
   };
