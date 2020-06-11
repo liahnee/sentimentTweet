@@ -3,6 +3,7 @@ import { Grid, Image } from 'semantic-ui-react';
 import bcard from '../assets/bcard.jpg';
 import CardFlip from "../components_searchHome/CardFlip";
 import AccSelected from "../HOC/AccSelected";
+import { connect } from 'react-redux';
 
 const SearchHome = props => {
 
@@ -60,4 +61,19 @@ const SearchHome = props => {
     )
 }
 
-export default AccSelected(SearchHome);
+
+
+const sToP = (state) => {
+	return {
+    allCelebs: state.manageCelebs.allCelebs,
+    allCelebsLoading: state.manageLoading.allCelebsLoading,
+    selectedCeleb: state.manageCelebs.celeb
+	};
+};
+
+const dToP = (dispatch) => ({
+    addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
+    selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data})
+});
+
+export default AccSelected(connect(sToP, dToP)(SearchHome));
