@@ -18,6 +18,9 @@ import Entered from './HOC/Entered';
 
 import { connect } from 'react-redux';
 
+
+const url = 'http://localhost:3000'
+
 class App extends React.Component {
 	constructor() {
 		super();
@@ -227,10 +230,10 @@ class App extends React.Component {
 		.then(resp => resp.json())
 		.then(data => {
 		  console.log(data);
-		  props.addAllCelebs(data);
+		  this.props.addAllCelebs(data);
 		})
 		.then(() => {
-		  props.allCelebsLoading();
+		  this.props.allCelebsLoading();
 		})
 	   } 
 
@@ -248,6 +251,21 @@ class App extends React.Component {
 	// 		</React.Fragment>
 	// 	);
   // };
+
+	handleChange = (e, item) => {
+		const id = item.value;
+		console.log(id)
+		this.props.selectCeleb(id);
+	}
+
+	options = () => {
+		const optionsArr = this.props.allCelebs.map((obj, i) => {
+			const { name, twitter_id, id } = obj;
+			return {key: twitter_id + i, value: id, text: name}
+		})
+		console.log("optionsArr", optionsArr);
+		return optionsArr
+	}
 	render() {
 		return (
 			<Router>
@@ -301,7 +319,7 @@ class App extends React.Component {
 										searchTwitter={this.searchTwitter}
 										updateSelectedAcc={this.updateSelectedAcc}
 									/> */}
-                  <DropDown top10={this.state.top10} handleCelebSelection={this.getTwitterIds} />
+                  <DropDown options={this.options()} handleCelebSelection={this.handleChange} />
 								</Route>
 
 								<Route exact path="/favorites">
@@ -348,13 +366,16 @@ class App extends React.Component {
 
 const sToP = (state) => {
 	return {
-    allCelebs: state.manageCelebs.allCelebs
+	allCelebs: state.manageCelebs.allCelebs,
+    allCelebsLoading: state.manageLoading.allCelebsLoading,
+    selectedCeleb: state.manageCelebs.celeb
 	};
 };
 
 const dToP = (dispatch) => ({
   addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
-  allCelebsLoading: () => dispatch({ type: 'DONE', payload:false})
+  allCelebsLoading: () => dispatch({ type: 'DONE', payload:false}),
+  selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data})
 });
 
-export default wconnect(sToP, dToP)(App);
+export default connect(sToP, dToP)(App);

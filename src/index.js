@@ -18,9 +18,7 @@ const enhancers = () => {
   return ( window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 }
 
-const celebrityStore = createStore(index
-  , enhancers()
-  );
+const celebrityStore = createStore(index, enhancers());
 
 
 ReactDOM.render(

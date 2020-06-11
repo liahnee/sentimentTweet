@@ -16,7 +16,7 @@ class Dropdown2 extends React.Component {
           fluid
           search
           selection
-          options={this.props.top10}
+          options={this.props.options}
           onChange={this.props.handleCelebSelection}
           className="searchDown"
         />
