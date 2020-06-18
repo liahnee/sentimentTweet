@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Modal, Form, Header, Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
-import ShouldRender from '../HOC/ShouldRender';
-
 import { connect } from 'react-redux';
 
 class ModalContainer extends Component {
@@ -14,12 +12,10 @@ class ModalContainer extends Component {
 			fields: {
 				username: '',
 				password: '',
-				newName: '',
-				newUsername: '',
-				newPassword: '',
-        success: false,
-      },
-      signedUp: true,
+				name: '',
+				success: false
+			},
+			signedUp: true
 		};
 	}
 	handleChange = (e) => {
@@ -27,33 +23,30 @@ class ModalContainer extends Component {
 		this.setState({
 			fields: { ...this.state.fields, [fieldName]: e.target.value }
 		});
-		// ,() => this.props.showModal;
 	};
 	handleSignUp = (e) => {
-		// e.preventDefault();
-		// console.log("reached handle sign up");
-		// console.log("password:", this.state.fields.newPassword);
-		// fetch("http://localhost:3000/users", {
-		//   method: "POST",
-		//   headers: {
-		//     "Content-Type": "application/json",
-		//     Accept: "application/json"
-		//   },
-		//   body: JSON.stringify({ user: {
-		//     name: this.state.fields.newName,
-		//     username: this.state.fields.newUsername,
-		//     password: this.state.fields.newPassword
-		//     // MAKE SURE THE ABOVE IS password:
-		//   }
-		//   })
-		// })
-		//   .then(response => response.json())
-		//   .then(data => {
-		//     console.log("after sign up form", data);
-		// this.setState(prevState => {
-		//   return { signedUp: true };
-		// });
-		// });
+		e.preventDefault();
+		fetch("http://localhost:3000/users", {
+		  method: "POST",
+		  headers: {
+		    "Content-Type": "application/json",
+		    Accept: "application/json"
+		  },
+		  body: JSON.stringify({ user: {
+		    name: this.state.fields.newName,
+		    username: this.state.fields.newUsername,
+		    password: this.state.fields.newPassword
+		    // MAKE SURE THE ABOVE IS password:
+		  }
+		  })
+		})
+		  .then(response => response.json())
+		  .then(data => {
+		    console.log("after sign up form", data);
+		this.setState(prevState => {
+		  return { signedUp: true };
+		});
+		});
 	};
 
 	onSignIn = () => {
@@ -83,21 +76,32 @@ class ModalContainer extends Component {
 		//   .then(() => {
 		//     this.props.searchTwitter();
 		//   });
-  };
+	};
+
+	toggle = () => {
+		this.setState({ 
+			signedUp: !this.state.signedUp, 
+			fields: {
+				username: '',
+				password: '',
+				name: '',} 
+		});
+	}
 
 	render() {
 		return (
-      <Modal open={this.props.modal} closeIcon size="tiny" onClose={this.props.toggleModal}>
+			<Modal open={this.props.modal} closeIcon size="tiny" onClose={this.props.toggleModal}>
 				{this.state.signedUp ? (
 					<React.Fragment>
 						<Header content="Sign In" as="h2" />
 						<Modal.Content>
 							<Form.Input
-								label="Username "
+								label="Username"
 								required
 								type="text"
 								placeholder="Username"
 								id="username"
+								value={this.state.fields.username}
 								onChange={this.handleChange}
 							/>
 							<Form.Input
@@ -106,20 +110,13 @@ class ModalContainer extends Component {
 								type="password"
 								placeholder="Password"
 								id="password"
+								value={this.state.fields.password}
 								onChange={this.handleChange}
 							/>
 						</Modal.Content>
 						<Modal.Actions>
-            <Button
-                content="Sign Up"
-                onClick={() => this.setState({signedUp: false})}
-
-              />
-							<Button
-								color="green"
-								content="Sign In"
-								onClick={ this.onSignIn	}
-							/>
+							<Button content="Sign Up" onClick={this.toggle} />
+							<Button color="green" content="Sign In" onClick={this.onSignIn} />
 						</Modal.Actions>
 					</React.Fragment>
 				) : (
@@ -133,46 +130,35 @@ class ModalContainer extends Component {
 								placeholder="User"
 								name="newName"
 								id="newName"
-								// value={this.state.newUser.newName}
+								value={this.state.fields.name}
 								onChange={this.handleChange}
 							/>
 							<Form.Input
-								label=" New username "
+								label="Username "
 								required
 								type="text"
 								placeholder="Username"
-								name="newUsername"
-								id="newUsername"
-								// value={this.state.newUser.newUsername}
+								id="username"
+								value={this.state.fields.username}
 								onChange={this.handleChange}
 							/>
 							<Form.Input
-								label=" New password "
+								label="Password "
 								required
 								type="password"
 								placeholder="Password"
-								name="newPassword"
-								id="newPassword"
-								// value={this.state.newUser.newPassword}
+								id="password"
+								value={this.state.fields.password}
 								onChange={this.handleChange}
 							/>
 						</Modal.Content>
 						<Modal.Actions>
-            <Button
-                content="Sign In"
-                onClick={() => this.setState({signedUp: true})}
-
-              />
-							<Button
-								onClick={this.handleSignUp}
-								color="green"
-								icon="pencil"
-								content="Sign Up!"
-							/>
+							<Button content="Sign In" onClick={this.toggle} />
+							<Button onClick={this.handleSignUp} color="green" icon="pencil" content="Sign Up!" />
 						</Modal.Actions>
 					</React.Fragment>
-        )}
-        </Modal>
+				)}
+			</Modal>
 		);
 	}
 }

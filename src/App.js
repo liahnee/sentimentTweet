@@ -3,7 +3,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { Icon, Menu, Sidebar, Modal } from 'semantic-ui-react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-import ModalContainer from './components_sidebar/ModalContainer';
+import ModalContainer from './components_sidebar/SignInModal';
 
 import Routes from './routes';
 
@@ -46,29 +46,24 @@ class App extends React.Component {
 		//reducer => manageLogin
 	};
 
-	setActiveItem = (activeItem) => {
-		this.setState({
-			activeItem
-		})
-	}
 
 	signed = () => {
 		const { activeItem } = this.state;
 		return (
 			<React.Fragment>
-				<Menu.Item name="home" active={activeItem === "home"} onClick={() => this.setActiveItem("home")} as={Link} to="/">
+				<Menu.Item name="home" active={activeItem === "home"} onClick={() => this.setState("home")} as={Link} to="/">
 					<Icon name="home" />
 					Home
 				</Menu.Item>
-				<Menu.Item name="favorites" active={activeItem === "favorites"} onClick={() => this.setActiveItem("favorites")} as={Link} to="/favorites">
+				<Menu.Item name="favorites" active={activeItem === "favorites"} onClick={() => this.setState("favorites")} as={Link} to="/favorites">
 					<Icon name="heart outline" />
 					Favorites
 				</Menu.Item>
-				<Menu.Item name="chart" active={activeItem === "chart"} onClick={() => this.setActiveItem("chart")} as={Link} to="/statistics">
+				<Menu.Item name="chart" active={activeItem === "chart"} onClick={() => this.setState("chart")} as={Link} to="/statistics">
 					<Icon name="chart area" />
 					Positivities
 				</Menu.Item>
-				<Menu.Item name="profile" active={activeItem === "profile"} onClick={() => this.setActiveItem("profile")} as={Link} to="/profile">
+				<Menu.Item name="profile" active={activeItem === "profile"} onClick={() => this.setState("profile")} as={Link} to="/profile">
 					<Icon name="user outline" />
 					Profile
 				</Menu.Item>
@@ -121,7 +116,7 @@ class App extends React.Component {
 							</Menu.Item>
 						)}
 					</Sidebar>
-					<ModalContainer shouldRender={this.props.modal}/>
+					<ModalContainer/>
 					<Sidebar.Pusher dimmed={this.props.open}>
 						<React.Fragment>
 							<Routes />
