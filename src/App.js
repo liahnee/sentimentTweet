@@ -25,95 +25,11 @@ class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			entered: true,
 			show: false,
-			logged_in: true,
-			user: {
-				// username: "CookieMonster",
-				// name: "Oreo the Cookie",
-				// password: "test",
-				// id: 1
-			},
-			favorites: [
-				// {
-				//   name: "Lady Gaga",
-				//   twitter_account_id: "@BarackObama"
-				// },
-				// {
-				//   name: "Katy Perry",
-				//   twitter_account_id: "@katyperry"
-				// },
-				// {
-				//   name: "Tom Holland",
-				//   twitter_account_id: "@justinbieber"
-				// }
-			],
-			tweets: [
-				// {
-				//   content: "Fame is prison",
-				//   celeb_username: "ladygaga",
-				//   // sentiment1(DeepAI): Neutral,
-				//   sentiment2: "Positive"
-				//   // sentiment3(MicroSoft): Positive 95%
-				// },
-				// {
-				//   content: "Thank you @AMAs goo.gle/AMAsVote",
-				//   celeb_username: "ladygaga",
-				//   // sentiment1(DeepAI): Negative,
-				//   sentiment2: "Neutral"
-				//   // sentiment3(Microsoft): Positive 90%
-				// },
-				// {
-				//   content:
-				//     "David Beckham and me for #TudorWatch. Full video out 10/30 #BornToDare",
-				//   celeb_username: "ladygaga",
-				//   // sentiment1(DeepAI): Neutral(2),
-				//   sentiment2: "Positive"
-				//   // sentiment3(Microsoft): Neutral 50%
-				// },
-				// {
-				//   content:
-				//     "Thank you @NYAMNYC for honoring @BTWFoundation with your Bold and Brave award for our work in supporting the mental and emotional wellness of young people. @momgerm",
-				//   celeb_username: "ladygaga",
-				//   // sentiment1(DeepAI): Positive, Neutral,
-				//   sentiment2: "Positive"
-				//   // sentiment3(Microsoft): Positive 97%
-				// },
-				// {
-				//   content: "Jazz & Piano at @ParkTheaterLV tonight #GagaVegas",
-				//   celeb_username: "ladygaga",
-				//   // sentiment1(DeepAI): Neutral,
-				//   sentiment2: "Positive"
-				//   // sentiment3(Microsoft): Neutral 50%
-				// },
-				// {
-				//   content: "Lokah Samstah Sukhino Bhavantu",
-				//   celeb_username: "ladygaga",
-				//   // sentiment1(DeepAI): Neutral,
-				//   sentiment2: "Positive"
-				//   // sentiment3(Microsoft): Neutral 50%
-				// },
-				// {
-				//   content:
-				//     "When they have to X-Ray almost your entire body…Just Dance. Gonna be ok.",
-				//   celeb_username: "ladygaga",
-				//   // sentiment1(DeepAI): Neutral, Negative,
-				//   sentiment2: "Neutral"
-				//   // sentiment3(Microsoft): Negative 24%
-				// },
-				// {
-				//   content:
-				//     "When they have to X-Ray almost your entire body…Just Dance. Gonna be ok.",
-				//   celeb_username: "ladygaga",
-				//   // sentiment1(DeepAI): Neutral, Negative,
-				//   sentiment2:  "Neutral"
-				//   // sentiment3(Microsoft): Negative 24%},
-				// }
-			],
+			logged_in: false,
+			user: {},
 			selectedAcc: { name: '', twitter_id: '' }, //twitteraccount
 			navBarShow: false,
-
-			top10: [ ]
 		};
 	}
 
@@ -175,29 +91,6 @@ class App extends React.Component {
 		});
   }
 
-	// handleSelect = (name, account) => {
-	//     this.setState({
-	//       selectedAcc: { name: name, twitter_id: account }
-	//     })
-	//     .then(
-	//       fetch("http://localhost:3000/celebs", {
-	//         method: "GET",
-	//         headers: {
-	//           "Content-Type": "application/json",
-	//           Accept: "application/json",
-	//           // Authorization: `Bearer ${localStorage.token}`
-	//         },
-	//         body: JSON.stringify({ twitter_id: this.state.selectedAcc.twitter_id })
-	//       })
-	//       .then(response => response.json())
-	//       .then(data => {
-	//         console.log(data)
-
-	//       })
-	//     )    }
-	//   ;
-	// }
-
 	signed = () => {
 		return (
 			<React.Fragment>
@@ -240,17 +133,6 @@ class App extends React.Component {
 	componentDidMount() {
 		this.getAllCelebs();
 	}
-
-	// entered = () => {
-	// 	return (
-	// 		<React.Fragment>
-	// 			<FavBar favs={this.state.favorites} />
-	// 			<NavBarOpener toggle={this.toggleNav} />
-	// 			<SearchHome tweets={this.state.tweets} name={this.state.selectedAcc.name} />
-	// 			<DropDown top10={this.state.top10} handleCelebSelection={this.getTwitterIds} />
-	// 		</React.Fragment>
-	// 	);
-  // };
 
 	handleChange = (e, item) => {
 		const id = item.value;
@@ -308,18 +190,9 @@ class App extends React.Component {
 						<React.Fragment>
 							<div className="App">
 								<NavBarOpener toggle={this.toggleNav} />
-
-
 								<Route exact path="/">
-									{/* <Entered
-										state={this.state}
-										Acc={this.state.selectedAcc}
-										enter={this.toggleEnter}
-										toggle={this.toggleNav}
-										searchTwitter={this.searchTwitter}
-										updateSelectedAcc={this.updateSelectedAcc}
-									/> */}
-                  <DropDown options={this.options()} handleCelebSelection={this.handleChange} />
+									
+                  				<DropDown options={this.options()} handleCelebSelection={this.handleChange} />
 								</Route>
 
 								<Route exact path="/favorites">
