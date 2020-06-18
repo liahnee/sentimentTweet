@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Modal, Form, Header, Button } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
+import { connect } from 'react-redux'
+
 class ModalContainer extends Component {
   constructor(props) {
     super(props);
@@ -86,7 +88,7 @@ class ModalContainer extends Component {
       <Modal
         // as={Form}
         // onSubmit={e => this.handleSignUp(e)}
-        open={true}
+        open={this.props.modal}
         size="tiny"
         // closeIcon={this.props.showModal}
         className="c-modal"
@@ -94,7 +96,7 @@ class ModalContainer extends Component {
         <Header content="Sign In" as="h2"></Header>
         <Modal.Actions>
           <Button
-            onClick={this.props.showModal}
+            onClick={this.props.toggleModal}
             color="black"
             icon="x"
             size="tiny"
@@ -177,4 +179,14 @@ class ModalContainer extends Component {
   }
 }
 
-export default ModalContainer;
+const sToP = (state) => {
+	return {
+	modal: state.manageNavBar.modal
+	};
+};
+
+const dToP = (dispatch) => ({
+	toggleModal: () => dispatch({type: 'TOGGLE_MODAL'}),
+});
+
+export default connect(sToP, dToP)(ModalContainer);

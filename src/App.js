@@ -15,9 +15,7 @@ const url = 'http://localhost:3000'
 
 class App extends React.Component {
 	showModal = () => {
-		this.setState({
-			show: !this.state.show
-		});
+		this.props.toggleModal()
 	};
 
 	getLoggedIn = (json) => {
@@ -45,12 +43,6 @@ class App extends React.Component {
 
 		//reducer => manageLogin
 	};
-
-  toggleNav = () => {
-		this.setState({
-			navBarShow: !this.state.navBarShow
-		});
-  }
 
 	signed = () => {
 		return (
@@ -105,12 +97,12 @@ class App extends React.Component {
 						animation="overlay"
 						icon="labeled"
 						inverted
-						onHide={this.toggleNav}
+						onHide={this.props.toggle}
 						vertical
-						visible={this.state.navBarShow}
+						visible={this.props.open}
 						width="thin"
 					>
-						{this.state.logged_in ? (
+						{this.props.login ? (
 							this.signed()
 						) : (
 							<Menu.Item
@@ -123,18 +115,16 @@ class App extends React.Component {
 						)}
 					</Sidebar>
 
-					{this.state.show ? (
+					{this.props.modal ? (
 						<ModalContainer
-							logged_in={this.state.logged_in}
-							user={this.state.user}
+							logged_in={this.props.login}
+							user={this.props.user}
 							getLoggedIn={this.getLoggedIn}
-							showModal={this.showModal}
-							generateAllTweets={this.generateAllTweets}
-							searchTwitter={this.searchTwitter}
+							showModal={this.props.modal}
 						/>
 					) : null}
 
-					<Sidebar.Pusher dimmed={this.state.navBarShow}>
+					<Sidebar.Pusher dimmed={this.props.open}>
 						<React.Fragment>
 								<Routes />
 						</React.Fragment>
@@ -149,14 +139,18 @@ const sToP = (state) => {
 	return {
 	allCelebs: state.manageCelebs.allCelebs,
     allCelebsLoading: state.manageLoading.allCelebsLoading,
-    selectedCeleb: state.manageCelebs.celeb
+	selectedCeleb: state.manageCelebs.celeb,
+	open: state.manageNavBar.open,
+	modal: state.manageNavBar.modal
 	};
 };
 
 const dToP = (dispatch) => ({
-  addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
-  allCelebsLoading: () => dispatch({ type: 'DONE', payload:false}),
-  selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data})
+	toggle: () => dispatch({type: 'TOGGLE'}),
+	toggleModal: () => dispatch({type: 'TOGGLE_MODAL'}),
+	addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
+	allCelebsLoading: () => dispatch({ type: 'DONE', payload:false}),
+	selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data})
 });
 
 export default connect(sToP, dToP)(App);

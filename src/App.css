@@ -8,12 +8,8 @@ html, body {
   overflow: hidden;
 }
 
-.App {
-  width: 100%;
+.App, .home {
   height: 100vh;
-  /* margin: 0; */
-  /* display: grid; */
-
 }
 
 #navBarBtn {

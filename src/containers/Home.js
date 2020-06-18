@@ -1,9 +1,12 @@
 import React from 'react';
+import '../assets/stylesheets/Home.css';
+
 import { Grid, Image } from 'semantic-ui-react';
 import bcard from '../assets/bcard.jpg';
 import CardFlip from "../components_searchHome/CardFlip";
-import AccSelected from "../HOC/AccSelected";
 import { connect } from 'react-redux';
+
+import { Dropdown } from 'semantic-ui-react';
 
 const Home = props => {
 
@@ -15,8 +18,8 @@ const Home = props => {
     // const check = (num) => {
     //     return allCards[num]? allCards[num] : <Image src={bcard} />
     // }
-    options = () => {
-		const optionsArr = this.props.allCelebs.map((obj, i) => {
+    const options = () => {
+		const optionsArr = props.allCelebs.map((obj, i) => {
 			const { name, twitter_id, id } = obj;
 			return {key: twitter_id + i, value: id, text: name}
 		})
@@ -24,16 +27,16 @@ const Home = props => {
 		return optionsArr
     }
     
-	handleChange = (e, item) => {
+	const handleChange = (e, item) => {
 		const id = item.value;
 		console.log(id)
-		this.props.selectCeleb(id);
+		props.selectCeleb(id);
 	}
 
     return (
         <div className='home'>
             
-            <DropDown options={options()} handleCelebSelection={handleChange} />
+            <Dropdown options={options()} handleCelebSelection={handleChange} />
             
         </div>
     )
@@ -54,4 +57,4 @@ const dToP = (dispatch) => ({
     selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data})
 });
 
-export default AccSelected(connect(sToP, dToP)(SearchHome));
+export default connect(sToP, dToP)(Home);

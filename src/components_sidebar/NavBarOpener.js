@@ -1,5 +1,6 @@
-import React from 'react'
-import { Button } from 'semantic-ui-react'
+import React from 'react';
+import { Button } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 
 const OpenNavButton = (props) => (

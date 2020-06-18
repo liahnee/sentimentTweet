@@ -21,11 +21,16 @@ const loggedOut = [{
 export default function manageNavBar(
 	state = {
         open: false,
-        menu: loggedOut
+        menu: loggedOut,
+        modal: false,
 	},
 	action
 ) {
 	switch (action.type) {
+        case 'TOGGLE_MODAL' :
+            return {...state,
+                modal: !state.modal
+            }
         case 'TOGGLE':
             return {...state,
                 open: !state.open
