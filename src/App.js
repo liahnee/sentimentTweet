@@ -1,8 +1,7 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Icon, Menu, Sidebar } from 'semantic-ui-react';
+import { Icon, Menu, Sidebar, Modal } from 'semantic-ui-react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-
 
 import ModalContainer from './components_sidebar/ModalContainer';
 
@@ -10,12 +9,16 @@ import Routes from './routes';
 
 import { connect } from 'react-redux';
 
-
-const url = 'http://localhost:3000'
+const url = 'http://localhost:3000';
 
 class App extends React.Component {
+
+	state = {
+		activeItem: "",
+	}
+
 	showModal = () => {
-		this.props.toggleModal()
+		this.props.toggleModal();
 	};
 
 	getLoggedIn = (json) => {
@@ -29,7 +32,6 @@ class App extends React.Component {
 			.then((data) => {
 				// manageLogin reducer => login
 			});
-
 	};
 
 	logOut = () => {
@@ -44,22 +46,29 @@ class App extends React.Component {
 		//reducer => manageLogin
 	};
 
+	setActiveItem = (activeItem) => {
+		this.setState({
+			activeItem
+		})
+	}
+
 	signed = () => {
+		const { activeItem } = this.state;
 		return (
 			<React.Fragment>
-				<Menu.Item as={Link} to="/">
+				<Menu.Item name="home" active={activeItem === "home"} onClick={() => this.setActiveItem("home")} as={Link} to="/">
 					<Icon name="home" />
 					Home
 				</Menu.Item>
-				<Menu.Item as={Link} to="/favorites">
+				<Menu.Item name="favorites" active={activeItem === "favorites"} onClick={() => this.setActiveItem("favorites")} as={Link} to="/favorites">
 					<Icon name="heart outline" />
 					Favorites
 				</Menu.Item>
-				<Menu.Item as={Link} to="/statistics">
+				<Menu.Item name="chart" active={activeItem === "chart"} onClick={() => this.setActiveItem("chart")} as={Link} to="/statistics">
 					<Icon name="chart area" />
 					Positivities
 				</Menu.Item>
-				<Menu.Item as={Link} to="/profile">
+				<Menu.Item name="profile" active={activeItem === "profile"} onClick={() => this.setActiveItem("profile")} as={Link} to="/profile">
 					<Icon name="user outline" />
 					Profile
 				</Menu.Item>
@@ -73,22 +82,23 @@ class App extends React.Component {
 
 	getAllCelebs = async () => {
 		await fetch(url + '/celebs')
-		.then(resp => resp.json())
-		.then(data => {
-		  console.log(data);
-		  this.props.addAllCelebs(data);
-		})
-		.then(() => {
-		  this.props.allCelebsLoading();
-		})
-	   } 
+			.then((resp) => resp.json())
+			.then((data) => {
+				console.log(data);
+				this.props.addAllCelebs(data);
+			})
+			.then(() => {
+				this.props.allCelebsLoading();
+			});
+	};
 
 	componentDidMount() {
 		this.getAllCelebs();
 	}
 
-
 	render() {
+
+
 		return (
 			<Router>
 				<Sidebar.Pushable>
@@ -105,28 +115,16 @@ class App extends React.Component {
 						{this.props.login ? (
 							this.signed()
 						) : (
-							<Menu.Item
-								onClick={this.showModal}
-								// {() => this.onSignIn()}
-							>
+							<Menu.Item name="sign in" onClick={this.props.toggleModal}>
 								<Icon name="sign in" />
-								Sign-in
+								Sign In
 							</Menu.Item>
 						)}
 					</Sidebar>
-
-					{this.props.modal ? (
-						<ModalContainer
-							logged_in={this.props.login}
-							user={this.props.user}
-							getLoggedIn={this.getLoggedIn}
-							showModal={this.props.modal}
-						/>
-					) : null}
-
+					<ModalContainer shouldRender={this.props.modal}/>
 					<Sidebar.Pusher dimmed={this.props.open}>
 						<React.Fragment>
-								<Routes />
+							<Routes />
 						</React.Fragment>
 					</Sidebar.Pusher>
 				</Sidebar.Pushable>
@@ -137,20 +135,20 @@ class App extends React.Component {
 
 const sToP = (state) => {
 	return {
-	allCelebs: state.manageCelebs.allCelebs,
-    allCelebsLoading: state.manageLoading.allCelebsLoading,
-	selectedCeleb: state.manageCelebs.celeb,
-	open: state.manageNavBar.open,
-	modal: state.manageNavBar.modal
+		allCelebs: state.manageCelebs.allCelebs,
+		allCelebsLoading: state.manageLoading.allCelebsLoading,
+		selectedCeleb: state.manageCelebs.celeb,
+		open: state.manageNavBar.open,
+		modal: state.manageNavBar.modal
 	};
 };
 
 const dToP = (dispatch) => ({
-	toggle: () => dispatch({type: 'TOGGLE'}),
-	toggleModal: () => dispatch({type: 'TOGGLE_MODAL'}),
+	toggle: () => dispatch({ type: 'TOGGLE' }),
+	toggleModal: () => dispatch({ type: 'TOGGLE_MODAL' }),
 	addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
-	allCelebsLoading: () => dispatch({ type: 'DONE', payload:false}),
-	selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data})
+	allCelebsLoading: () => dispatch({ type: 'DONE', payload: false }),
+	selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data })
 });
 
 export default connect(sToP, dToP)(App);

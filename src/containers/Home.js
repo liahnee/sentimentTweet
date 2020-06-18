@@ -36,7 +36,7 @@ const Home = props => {
     return (
         <div className='home'>
             
-            <Dropdown options={options()} handleCelebSelection={handleChange} />
+            <Dropdown options={options()} onChange={handleChange} />
             
         </div>
     )
