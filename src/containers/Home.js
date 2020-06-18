@@ -5,7 +5,7 @@ import CardFlip from "../components_searchHome/CardFlip";
 import AccSelected from "../HOC/AccSelected";
 import { connect } from 'react-redux';
 
-const SearchHome = props => {
+const Home = props => {
 
     // const allCards = props.tweets.map( tweet => {
     //     console.log('searchHOme')
@@ -15,14 +15,26 @@ const SearchHome = props => {
     // const check = (num) => {
     //     return allCards[num]? allCards[num] : <Image src={bcard} />
     // }
-
-
+    options = () => {
+		const optionsArr = this.props.allCelebs.map((obj, i) => {
+			const { name, twitter_id, id } = obj;
+			return {key: twitter_id + i, value: id, text: name}
+		})
+		console.log("optionsArr", optionsArr);
+		return optionsArr
+    }
+    
+	handleChange = (e, item) => {
+		const id = item.value;
+		console.log(id)
+		this.props.selectCeleb(id);
+	}
 
     return (
-        <div className='tweetcards'>
-            <React.Fragment>
-
-            </React.Fragment>
+        <div className='home'>
+            
+            <DropDown options={options()} handleCelebSelection={handleChange} />
+            
         </div>
     )
 }
