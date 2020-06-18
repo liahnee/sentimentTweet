@@ -1,13 +1,13 @@
 
 import React from 'react';
 
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import NavBarOpener from './components_sidebar/NavBarOpener';
 
-import Favorites from './containers/Favorites';
-import Profile from './containers/Profile';
-import Statistics from './containers/Statistics';
+// import Favorites from './containers/Favorites';
+// import Profile from './containers/Profile';
+// import Statistics from './containers/Statistics';
 
 import Home from './containers/Home';
 
@@ -15,15 +15,15 @@ import Home from './containers/Home';
 
 
 
-export default Routes = (props) => {
+const Routes = () => {
     return (
         <React.Fragment>
-            <NavBarOpener toggle={this.toggleNav} />
+            <NavBarOpener />
             <Route exact path="/">
                 <Home />
             </Route>
 
-            <Route exact path="/favorites">
+            {/* <Route exact path="/favorites">
                 <Favorites
                     top10={this.state.top10}
                     loggedin={this.state.logged_in}
@@ -55,7 +55,9 @@ export default Routes = (props) => {
                     searchTwitter={this.searchTwitter}
                     updateSelectedAcc={this.updateSelectedAcc}
                 />
-            </Route>
+            </Route> */}
         </React.Fragment>
     )
 }
+
+export default (Routes);
