@@ -134,7 +134,8 @@ const sToP = (state) => {
 		allCelebsLoading: state.manageLoading.allCelebsLoading,
 		selectedCeleb: state.manageCelebs.celeb,
 		open: state.manageNavBar.open,
-		modal: state.manageNavBar.modal
+		modal: state.manageNavBar.modal,
+		login: state.manageLogin.login
 	};
 };
 
