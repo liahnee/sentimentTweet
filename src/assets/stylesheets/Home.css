@@ -1,0 +1,18 @@
+.home {
+    height: 100vh;
+}
+
+.home-dropdown {
+    width: 300px;
+    margin: 0 auto 0 auto;
+    position: absolute;
+    bottom: 5rem;
+    left: 0;
+    right: 0;
+}
+
+.cards-grid-container {
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+}

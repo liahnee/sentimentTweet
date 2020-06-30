@@ -1,21 +1,20 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Icon, Menu, Sidebar, Modal } from 'semantic-ui-react';
+import { Icon, Menu, Sidebar } from 'semantic-ui-react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-import ModalContainer from './components_sidebar/SignInModal';
+import { connect } from 'react-redux';
 
+import ModalContainer from './components_sidebar/SignInModal';
 import Routes from './routes';
 
-import { connect } from 'react-redux';
 
 const url = 'http://localhost:3000';
 
 class App extends React.Component {
-
 	state = {
-		activeItem: "",
-	}
+		activeItem: ''
+	};
 
 	showModal = () => {
 		this.props.toggleModal();
@@ -35,35 +34,58 @@ class App extends React.Component {
 	};
 
 	logOut = () => {
-		localStorage.removeItem('token');
-		// this.setState((prevState) => {
-		// 	return {
-		// 		logged_in: false,
-		// 		user: null
-		// 	};
-		// });
-
-		//reducer => manageLogin
+		this.props.logout();
 	};
 
+	activateMenu = (menu) => {
+		this.props.closeSidebar();
+		this.props.clearCelebSelection();
+		this.setState({
+			activeItem: menu
+		})
+	};
 
 	signed = () => {
 		const { activeItem } = this.state;
 		return (
 			<React.Fragment>
-				<Menu.Item name="home" active={activeItem === "home"} onClick={() => this.setState("home")} as={Link} to="/">
+				<Menu.Item
+					name="home"
+					active={activeItem === 'home'}
+					onClick={() => this.activateMenu('home')}
+					as={Link}
+					to="/"
+				>
 					<Icon name="home" />
 					Home
 				</Menu.Item>
-				<Menu.Item name="favorites" active={activeItem === "favorites"} onClick={() => this.setState("favorites")} as={Link} to="/favorites">
+				<Menu.Item
+					name="favorites"
+					active={activeItem === 'favorites'}
+					onClick={() => this.activateMenu('favorites')}
+					as={Link}
+					to="/favorites"
+				>
 					<Icon name="heart outline" />
 					Favorites
 				</Menu.Item>
-				<Menu.Item name="chart" active={activeItem === "chart"} onClick={() => this.setState("chart")} as={Link} to="/statistics">
+				<Menu.Item
+					name="statistics"
+					active={activeItem === 'statistics'}
+					onClick={() => this.activateMenu('statistics')}
+					as={Link}
+					to="/statistics"
+				>
 					<Icon name="chart area" />
 					Positivities
 				</Menu.Item>
-				<Menu.Item name="profile" active={activeItem === "profile"} onClick={() => this.setState("profile")} as={Link} to="/profile">
+				<Menu.Item
+					name="profile"
+					active={activeItem === 'profile'}
+					onClick={() => this.activateMenu('profile')}
+					as={Link}
+					to="/profile"
+				>
 					<Icon name="user outline" />
 					Profile
 				</Menu.Item>
@@ -92,8 +114,6 @@ class App extends React.Component {
 	}
 
 	render() {
-
-
 		return (
 			<Router>
 				<Sidebar.Pushable>
@@ -116,7 +136,7 @@ class App extends React.Component {
 							</Menu.Item>
 						)}
 					</Sidebar>
-					<ModalContainer/>
+					<ModalContainer />
 					<Sidebar.Pusher dimmed={this.props.open}>
 						<React.Fragment>
 							<Routes />
@@ -140,11 +160,14 @@ const sToP = (state) => {
 };
 
 const dToP = (dispatch) => ({
-	toggle: () => dispatch({ type: 'TOGGLE' }),
+	toggle: () => dispatch({ type: 'TOGGLE_SIDEBAR' }),
 	toggleModal: () => dispatch({ type: 'TOGGLE_MODAL' }),
 	addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
 	allCelebsLoading: () => dispatch({ type: 'DONE', payload: false }),
-	selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data })
+	selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data }),
+	logout: () => dispatch({ type: 'LOGOUT'}),
+	clearCelebSelection: () => dispatch({ type: 'CLEAR_CELEB'}),
+	closeSidebar: () => dispatch({ type: 'CLOSE_SIDEBAR'})
 });
 
 export default connect(sToP, dToP)(App);

@@ -31,11 +31,14 @@ export default function manageNavBar(
             return {...state,
                 modal: !state.modal
             }
-        case 'TOGGLE':
+        case 'TOGGLE_SIDEBAR':
             return {...state,
                 open: !state.open
             };
-
+        case 'CLOSE_SIDEBAR':
+            return {...state,
+                open: false
+            }
 		case 'LOGGED_IN_MENU':
             return {...state,
                 menu: loggedIn

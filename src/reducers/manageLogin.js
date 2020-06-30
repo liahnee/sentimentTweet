@@ -2,19 +2,22 @@
 export default function manageNavBar(
 	state = {
         login: false,
-        username: null
+		username: null,
+		name: null
 	},
 	action
 ) {
 	switch (action.type) {
 		case 'LOGIN':
             return {...state,
-                login: true,
-                username: action.payload
+				login: true,
+				name: action.name,
+                username: action.username
 			};
-		case 'LOGGED_OUT_MENU':
+		case 'LOGOUT':
 			return {...state,
                 login: false,
+				name: null,
                 username: null
 			};
 

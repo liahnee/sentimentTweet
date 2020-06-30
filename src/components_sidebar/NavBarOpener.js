@@ -18,7 +18,7 @@ const sToP = (state) => {
 };
 
 const dToP = (dispatch) => ({
-  show: () => dispatch({ type: 'TOGGLE'}),
+  show: () => dispatch({ type: 'TOGGLE_SIDEBAR'}),
 });
 
 export default connect(sToP, dToP)(OpenNavButton);

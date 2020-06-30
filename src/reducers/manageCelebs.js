@@ -1,26 +1,31 @@
 
-const url = 'http://localhost:3000';
 
 export default function manageCelebs(
 	state = {
         celeb: {}, //exists to separate managePatient.state.in_view to just for cc later
         celebTweets: [],
-		allCelebs: []
+		allCelebs: [{name: "Loading"}, {twitter_id: null}, {id: null}]
 	},
 	action
 ) {
-	switch (action.type) {
+	switch (action.type){
 		case 'SELECT_CELEB':
-            let tweets = [];
-            fetch(url + (`/celebs/${action.payload}`))
-            .then(resp => resp.json())
-            .then(data => {
-                console.log(data)
-                tweets = data;
-            })
+			// let tweets = fetchSelect(action.payload);
+			// console.log("tweets", tweets)
 			return {...state,
-                celeb: action.payload,
-                celebTweets: tweets
+				celeb: action.payload
+				// celebTweets: tweets
+			};
+
+		case 'ADD_TWEETS':
+			console.log("tweets", action.payload)
+			return {...state,
+				celebTweets: action.payload
+			}
+		case 'CLEAR_CELEB':
+			return {...state,
+                celeb: {},
+                celebTweets: []
 			};
 		case 'ADD_CELEBS':
             console.log("hits here")
@@ -31,4 +36,6 @@ export default function manageCelebs(
 		default:
 			return state;
 	}
-}
+
+
+};
