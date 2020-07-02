@@ -10,13 +10,13 @@ import "semantic-ui-css/semantic.min.css";
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
 
 import index from './reducers/index';
 
 // const initialState = {};
 
-const celebrityStore = compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())(createStore)(index);
+const celebrityStore = compose(window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())(createStore)(index);
 
 
 ReactDOM.render(

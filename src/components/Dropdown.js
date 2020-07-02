@@ -10,7 +10,7 @@ const FullDropdown = (props) => {
 		// }
 		const optionsArr = props.allCelebs.map((obj, i) => {
 			const { name, twitter_id, id } = obj;
-			return { key: twitter_id + i, value: id, text: name };
+			return { key: `${twitter_id}_${i}`, value: id, text: name };
 		});
 		// console.log("optionsArr", optionsArr);
 		return optionsArr;

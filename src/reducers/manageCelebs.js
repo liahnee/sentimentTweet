@@ -3,7 +3,7 @@
 export default function manageCelebs(
 	state = {
         celeb: {}, //exists to separate managePatient.state.in_view to just for cc later
-        celebTweets: [],
+        celebTweets: [{},{},{},{},{},{},{},{},{},{}],
 		allCelebs: [{name: "Loading"}, {twitter_id: null}, {id: null}]
 	},
 	action
@@ -20,8 +20,8 @@ export default function manageCelebs(
 		case 'ADD_TWEETS':
 			console.log("tweets", action.payload)
 			return {...state,
-				celebTweets: action.payload
-			}
+				celebTweets: action.payload 
+			};
 		case 'CLEAR_CELEB':
 			return {...state,
                 celeb: {},
