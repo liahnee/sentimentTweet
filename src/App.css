@@ -4,7 +4,7 @@ html, body {
   overflow: hidden;
 }
 
-.App {
+.App, .home, .profile, .stats {
   height: 100vh;
 }
 
