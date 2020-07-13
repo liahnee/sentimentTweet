@@ -1,41 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import ReactCardFlip from "react-card-flip";
-import ActualTweetCard from "./ActualTweetCard";
-import ActualTweetCardFront from "./ActualTweetCardFront";
 
-class CardFlip extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isFlipped: false
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+import CardFront from './CardFront';
+import CardBack from './CardBack';
 
-  handleClick(e) {
-    e.preventDefault();
-    this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-  }
+const CardFlip = (props) => {
+  console.log("cardflip props", props)
+  const [isFlipped, setIsFlipped ] = useState(false);
 
-  render() {
+
     return (
-      <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="vertical" id='flipcard'>
-        <ActualTweetCardFront
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical" id='flipcard'>
+        <CardFront 
           key="front"
-          handleClick={this.handleClick}
-          sent={this.props.tweet.sentiment2}
-        ></ActualTweetCardFront>
+          handleClick={() => setIsFlipped(!isFlipped)}
+          content={props.tweet.tweet}
+          date={props.tweet.created_at}
+          sent={props.tweet.sentiment}
+         />
 
-        <ActualTweetCard
+        <CardBack
           key="back"
-          handleClick={this.handleClick}
-          content={this.props.tweet.content}
-          date={this.props.tweet.date}
-          sent={this.props.tweet.sentiment2}
-        ></ActualTweetCard>
+          handleClick={() => setIsFlipped(!isFlipped)}
+          sent={props.tweet.sentiment}
+        ></CardBack>
       </ReactCardFlip>
     );
-  }
+
 }
 
 export default CardFlip;

@@ -1,3 +1,70 @@
+:root {
+    --color-black-alpha: rgba(43, 43, 43, 0.63)
+}
+
 .profile {
     height: 100vh;
+    width: 100vw;
+    color: white;
+    background-image: url('../profile2.12.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.profile-center-container {
+    position: relative;
+    top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 0 auto;
+    height: 90%;
+    width: 900px;
+    background-color: var(--color-black-alpha);
+}
+
+.profile-center {
+    margin-top: 3rem;
+    width: 800px;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+}
+.profile h2 {
+    font-size: 2rem;
+    align-self: center;
+    justify-self: center;
+}
+
+.username {
+    font-size: 2rem;
+    align-self: center;
+    justify-self: center;
+}
+
+.profile-label {
+    
+    color: white !important;
+}
+
+@media (max-width: 1000px) {
+    .profile-center-container {
+        width: 600px;
+    }
+    .profile-center {
+        width: 500px;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-center-container {
+    width: 100%;
+    }
+    .profile-center {
+        width: 90%;
+    }
+}
+
+.profile-submit button {
+    width: 100%;
 }

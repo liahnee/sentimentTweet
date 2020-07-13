@@ -106,7 +106,8 @@ class App extends React.Component {
 			})
 			.then(() => {
 				this.props.allCelebsLoading();
-			});
+			})
+			.catch(err => console.log(err));
 	};
 
 	componentDidMount() {
