@@ -1,9 +1,9 @@
 
 export default function manageNavBar(
 	state = {
-        login: false,
-		username: null,
-		name: null
+        login: true,
+		username: 'example',
+		name: 'example'
 	},
 	action
 ) {

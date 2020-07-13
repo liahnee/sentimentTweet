@@ -15,7 +15,7 @@ const CardFlip = (props) => {
           key="front"
           handleClick={() => setIsFlipped(!isFlipped)}
           content={props.tweet.tweet}
-          date={props.tweet.createdAt}
+          date={props.tweet.created_at}
           sent={props.tweet.sentiment}
          />
 

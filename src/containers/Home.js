@@ -13,21 +13,11 @@ const url = 'http://localhost:3000';
 
 const Home = (props) => {
 	const [ tweets, setTweets ] = useState([ {}, {}, {}, {}, {}, {}, {}, {}, {} ]);
-	// const allCards = props.tweets.map( tweet => {
-	//     console.log('searchHOme')
-	//     return <CardFlip tweet={tweet}/>
-	// })
-
-	// const check = (num) => {
-	//     return allCards[num]? allCards[num] : <Image src={bcard} />
-	// }
-
 	const [ loading, setLoading ] = useState(false);
-	useEffect(() => {}, tweets);
+	// useEffect(() => {}, tweets);
 
 	const handleChange = (e, item) => {
 		const id = item.value;
-		// console.log(id)
 		props.selectCeleb(id);
 		setLoading(true);
 		fetchSelect(id);
@@ -37,7 +27,6 @@ const Home = (props) => {
 		fetch(url + `/celebs/${payload}`)
 			.then((resp) => resp.json())
 			.then((data) => {
-				console.log(data);
 				setLoading(false);
 				props.addTweets(data);
 				setTweets(data);
@@ -87,25 +76,10 @@ const sToP = (state) => {
 	};
 };
 
-const tweetsDispatch = (data, dispatch) =>
-	new Promise((resolve, reject) => {
-		// do anything here
-		dispatch({ type: 'ADD_TWEETS', payload: data });
-		resolve();
-	});
-
 const dToP = (dispatch) => ({
 	addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
 	selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data }),
-	addTweets: (data) => tweetsDispatch(data, dispatch)
-	// new Promise((resolve, reject) => {
-	//     dispatch({
-	//       type: 'ADD_TWEETS',
-	//       payload: data
-	//     });
-	//     resolve()
-	// }),
-	// (data) => dispatch({ type: , })
+	addTweets: (data) => dispatch({type: 'ADD_TWEETS', payload: data})
 });
 
 export default connect(sToP, dToP)(Home);
