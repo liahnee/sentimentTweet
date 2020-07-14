@@ -1,13 +1,12 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Icon, Menu, Sidebar } from 'semantic-ui-react';
+import { Icon, Menu, Sidebar, Popup } from 'semantic-ui-react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 import ModalContainer from './components_sidebar/SignInModal';
 import Routes from './routes';
-
 
 const url = 'http://localhost:3000';
 
@@ -42,7 +41,7 @@ class App extends React.Component {
 		this.props.clearCelebSelection();
 		this.setState({
 			activeItem: menu
-		})
+		});
 	};
 
 	signed = () => {
@@ -107,7 +106,7 @@ class App extends React.Component {
 			.then(() => {
 				this.props.allCelebsLoading();
 			})
-			.catch(err => console.log(err));
+			.catch((err) => console.log(err));
 	};
 
 	componentDidMount() {
@@ -131,10 +130,36 @@ class App extends React.Component {
 						{this.props.login ? (
 							this.signed()
 						) : (
-							<Menu.Item name="sign in" onClick={this.props.toggleModal}>
-								<Icon name="sign in" />
-								Sign In
-							</Menu.Item>
+							<React.Fragment>
+								<Menu.Item name="home" as={Link} to="/">
+									<Icon name="home" />
+									Home
+								</Menu.Item>
+								<Popup
+									hoverable
+									on="hover"
+									position="top left"
+									trigger={
+										<Menu.Item as={Link} to="/statistics">
+											<Icon name="chart area" />
+											Positivities
+										</Menu.Item>
+									}
+									content="Available after sign in"
+									inverted
+									style={{
+										boderRadius: 5,
+										opacity: 0.7,
+										padding: '2em',
+										marginTop: '50px',
+										left: '2em'
+									}}
+								/>
+								<Menu.Item name="sign in" onClick={this.props.toggleModal}>
+									<Icon name="sign in" />
+									Sign In
+								</Menu.Item>
+							</React.Fragment>
 						)}
 					</Sidebar>
 					<ModalContainer />
@@ -166,9 +191,9 @@ const dToP = (dispatch) => ({
 	addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
 	allCelebsLoading: () => dispatch({ type: 'DONE', payload: false }),
 	selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data }),
-	logout: () => dispatch({ type: 'LOGOUT'}),
-	clearCelebSelection: () => dispatch({ type: 'CLEAR_CELEB'}),
-	closeSidebar: () => dispatch({ type: 'CLOSE_SIDEBAR'})
+	logout: () => dispatch({ type: 'LOGOUT' }),
+	clearCelebSelection: () => dispatch({ type: 'CLEAR_CELEB' }),
+	closeSidebar: () => dispatch({ type: 'CLOSE_SIDEBAR' })
 });
 
 export default connect(sToP, dToP)(App);

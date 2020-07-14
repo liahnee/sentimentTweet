@@ -2,8 +2,11 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-
-
+    background-image: url('../home1.1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: center;
+    text-align: center;
 }
 
 .home-dropdown {
@@ -55,4 +58,18 @@
     #card-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.signin-modal .ui.input{
+    width: 100%;
+    padding-bottom: 0.4em;
+}
+
+.span-button {
+    height: 2rem;
+    padding: 0.8em;
+}
+
+.span-button:hover {
+    cursor: pointer;
 }

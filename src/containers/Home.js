@@ -36,32 +36,21 @@ const Home = (props) => {
 
 	return (
 		<div className="home">
-			<div id="cards-grid-container">
-				<div id="cards-grid">
-					{tweets[0].tweet ? (
-						tweets.map((tweet) => {
-							return <CardFlip tweet={tweet} />;
-						})
-					) : null}
-				</div>
-			</div>
 			{loading ? (
-				<div
-					style={{
-						color: 'white',
-						fontSize: '3rem',
-						position: 'absolute',
-						margin: '0 auto 0 auto',
-						top: '0',
-						bottom: '0',
-						left: '0',
-						right: '0',
-						zIndex: '5'
-					}}
-				>
-					Loading...{' '}
+				<div className="loading">
+					<p className="loading-text">Loading...this may take a couple of minutes</p>
 				</div>
-			) : null}
+			) : (
+				<div id="cards-grid-container">
+					<div id="cards-grid">
+						{tweets[0].tweet ? (
+							tweets.map((tweet) => {
+								return <CardFlip tweet={tweet} />;
+							})
+						) : null}
+					</div>
+				</div>
+			)}
 			<FullDropdown handleChange={handleChange} />
 		</div>
 	);
@@ -79,7 +68,7 @@ const sToP = (state) => {
 const dToP = (dispatch) => ({
 	addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
 	selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data }),
-	addTweets: (data) => dispatch({type: 'ADD_TWEETS', payload: data})
+	addTweets: (data) => dispatch({ type: 'ADD_TWEETS', payload: data })
 });
 
 export default connect(sToP, dToP)(Home);

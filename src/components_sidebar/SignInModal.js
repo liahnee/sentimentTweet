@@ -154,7 +154,7 @@ class ModalContainer extends Component {
 
 	render() {
 		return (
-			<Modal as="form" open={this.props.modal} closeIcon size="tiny" onClose={this.closeModal}>
+			<Modal className="signin-modal" as="form" open={this.props.modal} closeIcon size="tiny" onClose={this.closeModal}>
 				{this.state.signedUp ? (
 					<React.Fragment>
 						<Header content="Sign In" as="h2" />
@@ -231,7 +231,7 @@ class ModalContainer extends Component {
 							) : null}
 						</Modal.Content>
 						<Modal.Actions>
-							<span onClick={this.toggleInUp}> Sign In</span>
+							<span className="span-button" onClick={this.toggleInUp}> Sign In</span>
 							<Button onClick={this.handleSignUp} color="green" icon="pencil" content="Sign Up!" />
 						</Modal.Actions>
 					</React.Fragment>
