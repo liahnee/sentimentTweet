@@ -1,7 +1,7 @@
 
 export default function manageNavBar(
 	state = {
-        login: true,
+        login: false,
 		username: 'example',
 		name: 'example'
 	},
