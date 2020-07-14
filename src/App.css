@@ -17,3 +17,20 @@ html, body {
   bottom: 30px;
 }
 
+
+.loading {
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  height: 7rem;
+  top: 55%;
+  background-color: rgba(255, 255, 255, 0.678);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-text {
+  font-size: 2rem;
+  font-weight: strong;
+}

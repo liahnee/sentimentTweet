@@ -5,7 +5,8 @@
     background-image: url('../home1.1.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-
+    align-items: center;
+    text-align: center;
 }
 
 .home-dropdown {
