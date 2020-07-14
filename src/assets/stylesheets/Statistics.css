@@ -1,3 +1,29 @@
-.statistics {
-    height: 100vh;
+.stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.stream {
+}
+
+.stream canvas {
+    width: 80% !important;
+    margin: 0 auto 7rem auto !important;
+
+    background-color: rgba(255, 255, 255, 0.63);
+}
+
+@media (max-width: 1000px) {
+    .stream {
+        width: 800px;
+    }
+}
+
+@media (max-width: 800px) {
+    .stream {
+        width: 90%;
+    }
 }

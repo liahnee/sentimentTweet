@@ -2,7 +2,9 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-
+    background-image: url('../home1.1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 
 }
 

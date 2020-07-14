@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import '../assets/stylesheets/Profile.css';
 
 import { Form, Icon, Input } from 'semantic-ui-react';
-
-import img from '../assets/profile2.12.jpg';
-import NavBarOpener from '../components_sidebar/NavBarOpener';
 import LoggedInHOC from '../HOC/LoggedInHOC';
 
 class Profile extends Component {
