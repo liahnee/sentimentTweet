@@ -59,3 +59,17 @@
         grid-template-columns: 1fr;
     }
 }
+
+.signin-modal .ui.input{
+    width: 100%;
+    padding-bottom: 0.4em;
+}
+
+.span-button {
+    height: 2rem;
+    padding: 0.8em;
+}
+
+.span-button:hover {
+    cursor: pointer;
+}
