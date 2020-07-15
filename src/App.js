@@ -58,7 +58,7 @@ class App extends React.Component {
 					<Icon name="home" />
 					Home
 				</Menu.Item>
-				<Menu.Item
+				{/* <Menu.Item
 					name="favorites"
 					active={activeItem === 'favorites'}
 					onClick={() => this.activateMenu('favorites')}
@@ -67,7 +67,7 @@ class App extends React.Component {
 				>
 					<Icon name="heart outline" />
 					Favorites
-				</Menu.Item>
+				</Menu.Item> */}
 				<Menu.Item
 					name="statistics"
 					active={activeItem === 'statistics'}
