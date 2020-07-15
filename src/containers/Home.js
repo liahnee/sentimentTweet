@@ -27,6 +27,10 @@ const Home = (props) => {
 		fetch(url + `/celebs/${payload}`)
 			.then((resp) => resp.json())
 			.then((data) => {
+				if (data.status === 500) {
+					console.log("erorr 500", data)
+					return;
+				}
 				setLoading(false);
 				props.addTweets(data);
 				setTweets(data);

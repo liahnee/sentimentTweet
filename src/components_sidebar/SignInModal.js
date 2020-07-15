@@ -186,8 +186,8 @@ class ModalContainer extends Component {
 							) : null}
 						</Modal.Content>
 						<Modal.Actions>
-							<span onClick={this.toggleInUp}> Sign Up </span>
-							<Button color="green" content="Sign In" onClick={this.handleSignIn} />
+							<span className="span-button" onClick={this.toggleInUp}> Sign Up </span>
+							<Button color="green" icon="pencil" content="Sign In" onClick={this.handleSignIn} />
 						</Modal.Actions>
 					</React.Fragment>
 				) : (
