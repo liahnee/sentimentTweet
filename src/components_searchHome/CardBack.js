@@ -3,9 +3,13 @@ import { Card } from 'semantic-ui-react'
 
 
 const CardBack = (props) =>  {
+  const roundScore = () => {
+    return props.sent.splice(0, 4)
+  }
   return (
     <Card onClick={props.handleClick} className='tweetcard'>
-          <p>Senitment score: {props.sent}</p> 
+      <Card.Content header="Sentiment Score:" />
+      <Card.Content description={roundScore()} />
     </Card>
   )
 };

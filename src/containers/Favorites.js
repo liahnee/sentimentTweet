@@ -3,7 +3,6 @@ import React from "react";
 import LoggedInHOC from "../HOC/LoggedInHOC";
 import { Card, Divider } from "semantic-ui-react";
 
-import FavoriteCard from "../components_favorites/FavoriteCard";
 import img from "../assets/favs1.2.jpg";
 
 
