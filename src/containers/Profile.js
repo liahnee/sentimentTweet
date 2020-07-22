@@ -4,6 +4,7 @@ import '../assets/stylesheets/Profile.css';
 
 import { Form, Icon, Input } from 'semantic-ui-react';
 import LoggedInHOC from '../HOC/LoggedInHOC';
+import Modal from '../components_profile/resultModal';
 
 class Profile extends Component {
 	constructor(props) {
@@ -13,7 +14,9 @@ class Profile extends Component {
 		name: this.props.name,
 		username: this.props.username,
 		password: '',
-		new_password: ''
+		new_password: '',
+		toggle: false,
+		result_text: '',
 	};
 
 	handleChange = (e, key) => {
@@ -27,7 +30,7 @@ class Profile extends Component {
 		e.preventDefault();
 		const { name, username, password, new_password } = this.state;
 		console.log('handleSubmit');
-		fetch(`http://localhost:3000/users/${this.props.user.id}`, {
+		fetch(`http://localhost:3000/users/${this.props.id}`, {
 		  method: "PATCH",
 		  headers: {
 		    "Content-Type": "application/json",
@@ -39,16 +42,30 @@ class Profile extends Component {
 		.then(resp => resp.json())
 		.then(data => {
 		  console.log("returned profile patch data", data)
+		//   setState result text
 		})
 		.catch(err => {
 		  console.log(err)
 		});
 	};
 
+	openModal = () => {
+		this.setState({
+			toggle: true
+		})
+	}
+	closeModal = () =>{
+		this.setState({
+			toggle:false,
+			result_text: ''
+		})
+	}
+
 	render() {
 		return (
 			<div className="profile">
 				<div className="profile-center-container">
+					<Modal isOpen={this.state.toggle} close={this.closeModal} text={this.state.result_text}/>
 					<div className="profile-center">
 						<h2 className="profile-name">Username:</h2>
 						<p className="username">{this.state.username}</p>
