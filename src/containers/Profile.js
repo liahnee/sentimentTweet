@@ -13,38 +13,36 @@ class Profile extends Component {
 		name: this.props.name,
 		username: this.props.username,
 		password: '',
-		newPassword: ''
+		new_password: ''
 	};
 
-	handleChange = (e) => {
-		// let val = e.target.value;
+	handleChange = (e, key) => {
+		let val = e.target.value;
 		console.log(e);
-		// let key =
-		// this.setState({
-		//   [key]: val
-		// });
+		this.setState({
+		  [key]: val
+		});
 	};
-
 	handleSubmit = (e) => {
 		e.preventDefault();
-		// const { name, username, password, newPassword } = this.state;
+		const { name, username, password, new_password } = this.state;
 		console.log('handleSubmit');
-		// fetch(`http://localhost:3000/users/${this.state.user.id}`, {
-		//   method: "PATCH",
-		//   headers: {
-		//     "Content-Type": "application/json",
-		//     Accept: "application/json",
-		//     credentials: 'include'
-		//   },
-		//   body: JSON.stringify({ name, username, password, newPassword})
-		// })
-		// .then(resp => resp.json())
-		// .then(data => {
-		//   console.log("returned profile patch data", data)
-		// })
-		// .catch(err => {
-		//   console.log(err)
-		// });
+		fetch(`http://localhost:3000/users/${this.props.user.id}`, {
+		  method: "PATCH",
+		  headers: {
+		    "Content-Type": "application/json",
+		    Accept: "application/json",
+		    credentials: 'include'
+		  },
+		  body: JSON.stringify({ name, username, password, new_password})
+		})
+		.then(resp => resp.json())
+		.then(data => {
+		  console.log("returned profile patch data", data)
+		})
+		.catch(err => {
+		  console.log(err)
+		});
 	};
 
 	render() {
@@ -56,17 +54,17 @@ class Profile extends Component {
 						<p className="username">{this.state.username}</p>
 						Please enter your current password and any other field you would like to change.
 						<Form onSubmit={(e) => this.handleSubmit(e)}>
-							<Form.Field onChange={(e) => this.handleChange(e.target.value)}>
+							<Form.Field onChange={(e) => this.handleChange(e, "newname")}>
 								<label className="profile-label">New Name:</label>
 								<input className="input" placeholder={this.props.name} />
 							</Form.Field>
 							<Form.Field>
 								<label className="profile-label">Current Password:</label>
-								<input placeholder="Current Password" type="password" onChange={this.handleChange} />
+								<input placeholder="Current Password" type="password" onChange={e => this.handleChange(e, "password")} />
 							</Form.Field>
 							<Form.Field>
 								<label className="profile-label">New Password:</label>
-								<input placeholder="New Password" type="password" onChange={this.handleChange} />
+								<input placeholder="New Password" type="password" onChange={e => this.handleChange(e, "new_password")} />
 							</Form.Field>
 							<Form.Button inverted icon className="profile-submit">
 								<span>Confirm Changes </span>
@@ -83,7 +81,8 @@ class Profile extends Component {
 const sToP = (state) => {
 	return {
 		name: state.manageLogin.name,
-		username: state.manageLogin.username
+		username: state.manageLogin.username,
+		id: state.manageLogin.id
 	};
 };
 

@@ -25,8 +25,9 @@ const Home = (props) => {
 
 	const fetchSelect = async (payload) => {
 		fetch(url + `/celebs/${payload}`)
-			.then((resp) => resp.json())
+			.then((resp) => {console.log(resp); return resp.json()})
 			.then((data) => {
+				console.log("data", data)
 				if (data.status === 500) {
 					console.log("erorr 500", data)
 					return;
@@ -42,7 +43,7 @@ const Home = (props) => {
 		<div className="home">
 			{loading ? (
 				<div className="loading">
-					<p className="loading-text">Loading...this may take a couple of minutes</p>
+					<p className="loading-text">Loading...this may take  up to a minute</p>
 				</div>
 			) : (
 				<div id="cards-grid-container">

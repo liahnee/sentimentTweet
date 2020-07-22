@@ -48,7 +48,8 @@ class ModalContainer extends Component {
 						errorMsg: 'Failed:' + data.message
 					});
 				} else {
-					this.props.login(data.username);
+					const action = {name: data.user.name, username: data.user.username, id: data.user.id}
+					this.props.login(action);
 				}
 				console.log('data', data.message);
 			})
@@ -59,16 +60,6 @@ class ModalContainer extends Component {
 					errorMsg: 'Failed:' + err.message
 				});
 			})
-			// .then(() => {
-			// 	this.props.generateAllTweets();
-			// })
-			// .then(() => {
-			// 	this.props.searchTwitter();
-			// })
-			// .catch((err) => {
-			// 	//if login fails, catch the rest fetch
-			// 	console.log(err);
-			// })
 	};
 
 	handleSignIn = (e) => {
@@ -96,7 +87,8 @@ class ModalContainer extends Component {
 						errorMsg: 'Failed:' + data.message
 					});
 				} else {
-					this.props.login(data.user.username);
+					const action = {name: data.user.name, username: data.user.username, id: data.user.id}
+					this.props.login(action);
 					this.closeModal();
 					return <Redirect to ='/home' />
 				}
@@ -109,16 +101,6 @@ class ModalContainer extends Component {
 					errorMsg: 'Failed:' + err.message
 				});
 			})
-			// .then(() => {
-			// 	this.props.generateAllTweets();
-			// })
-			// .then(() => {
-			// 	this.props.searchTwitter();
-			// })
-			// .catch((err) => {
-			// 	//if login fails, catch the rest fetch
-			// 	console.log(err);
-			// })
 
 	};
 
@@ -249,7 +231,7 @@ const sToP = (state) => {
 
 const dToP = (dispatch) => ({
 	toggleModal: () => dispatch({ type: 'TOGGLE_MODAL' }),
-	login: (username) => dispatch({ type: 'LOGIN', payload: username }),
+	login: (payload) => dispatch({ type: 'LOGIN', payload }),
 });
 
 export default connect(sToP, dToP)(ModalContainer);

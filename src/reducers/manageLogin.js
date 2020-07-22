@@ -11,8 +11,9 @@ export default function manageNavBar(
 		case 'LOGIN':
             return {...state,
 				login: true,
-				name: action.name,
-                username: action.username
+				name: action.payload.name,
+				username: action.payload.username,
+				id: action.payload.id
 			};
 		case 'LOGOUT':
 			return {...state,

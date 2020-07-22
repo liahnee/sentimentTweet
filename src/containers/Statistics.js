@@ -43,7 +43,7 @@ const Statistics = (props) => {
 			className="stats"
 		>
 			{loading ? (
-				<div className="loading"><p className="loading-text">Loading...this may take a couple of minutes</p></div>
+				<div className="loading"><p className="loading-text">Loading...this may take up to a minute</p></div>
 			) : (
 				<Stream tweets={tweets} acc={props.selectedCeleb} />
 			)}
