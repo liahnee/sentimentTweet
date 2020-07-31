@@ -5,6 +5,8 @@ import 'semantic-ui-css/semantic.min.css';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+const url = 'https://cors-anywhere.herokuapp.com/https://sentiment-tweet-api.herokuapp.com/';
+
 class ModalContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -31,7 +33,7 @@ class ModalContainer extends Component {
 		e.preventDefault();
 		const { name, username, password } = this.state.fields;
 
-		fetch('http://localhost:3000/users', {
+		fetch( url + 'users', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -50,6 +52,10 @@ class ModalContainer extends Component {
 				} else {
 					const action = {name: data.user.name, username: data.user.username, id: data.user.id}
 					this.props.login(action);
+					localStorage.setItem('st_token', data.jwt)
+                    localStorage.setItem('st_username', data.user.username)
+                    localStorage.setItem('st_name', data.user.name)
+                    localStorage.setItem('st_id', data.user.id)
 				}
 				console.log('data', data.message);
 			})
@@ -64,7 +70,7 @@ class ModalContainer extends Component {
 
 	handleSignIn = (e) => {
 		e.preventDefault();
-		fetch('http://localhost:3000/login', {
+		fetch( url + 'login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -89,6 +95,10 @@ class ModalContainer extends Component {
 				} else {
 					const action = {name: data.user.name, username: data.user.username, id: data.user.id}
 					this.props.login(action);
+					localStorage.setItem('st_token', data.jwt)
+                    localStorage.setItem('st_username', data.user.username)
+                    localStorage.setItem('st_name', data.user.name)
+                    localStorage.setItem('st_id', data.user.id)
 					this.closeModal();
 					return <Redirect to ='/home' />
 				}

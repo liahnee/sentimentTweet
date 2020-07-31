@@ -8,32 +8,34 @@ import { connect } from 'react-redux';
 import ModalContainer from './components_sidebar/SignInModal';
 import Routes from './routes';
 
-const url = 'http://localhost:3000';
+const url = 'https://cors-anywhere.herokuapp.com/https://sentiment-tweet-api.herokuapp.com/';
 
 class App extends React.Component {
 	state = {
 		activeItem: ''
 	};
 
+	isloggedIn = () => {
+		if (localStorage.st_token) {
+			const data = {
+					username: localStorage.st_username,
+					name: localStorage.st_name,
+					id: localStorage.st_id
+			};
+			this.props.login(data);
+		} 
+	};
+	componentDidMount(){
+		this.isloggedIn();
+	}
 	showModal = () => {
 		this.props.toggleModal();
 	};
 
-	getLoggedIn = (json) => {
-		fetch('http://localhost:3000/', {
-			method: 'GET',
-			headers: {
-				Authorization: `Bearer ${localStorage.token}`
-			}
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				// manageLogin reducer => login
-			});
-	};
-
-	logOut = () => {
-		this.props.logout();
+	signOut = () => {
+		localStorage.clear();
+		window.location.reload();
+		this.props.logOut();
 	};
 
 	activateMenu = (menu) => {
@@ -88,7 +90,7 @@ class App extends React.Component {
 					<Icon name="user outline" />
 					Profile
 				</Menu.Item>
-				<Menu.Item onClick={() => this.logOut()}>
+				<Menu.Item onClick={() => this.signOut()}>
 					<Icon name="sign out" />
 					Sign-out
 				</Menu.Item>
@@ -127,7 +129,7 @@ class App extends React.Component {
 						visible={this.props.open}
 						width="thin"
 					>
-						{this.props.login ? (
+						{this.props.isLoggedin ? (
 							this.signed()
 						) : (
 							<React.Fragment>
@@ -181,7 +183,7 @@ const sToP = (state) => {
 		selectedCeleb: state.manageCelebs.celeb,
 		open: state.manageNavBar.open,
 		modal: state.manageNavBar.modal,
-		login: state.manageLogin.login
+		isLoggedin: state.manageLogin.login
 	};
 };
 
@@ -191,9 +193,10 @@ const dToP = (dispatch) => ({
 	addAllCelebs: (data) => dispatch({ type: 'ADD_CELEBS', payload: data }),
 	allCelebsLoading: () => dispatch({ type: 'DONE', payload: false }),
 	selectCeleb: (data) => dispatch({ type: 'SELECT_CELEB', payload: data }),
-	logout: () => dispatch({ type: 'LOGOUT' }),
+	logOut: () => dispatch({ type: 'LOGOUT' }),
 	clearCelebSelection: () => dispatch({ type: 'CLEAR_CELEB' }),
-	closeSidebar: () => dispatch({ type: 'CLOSE_SIDEBAR' })
+	closeSidebar: () => dispatch({ type: 'CLOSE_SIDEBAR' }),
+	login: (payload) => dispatch({ type: 'LOGIN', payload }),
 });
 
 export default connect(sToP, dToP)(App);

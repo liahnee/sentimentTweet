@@ -9,7 +9,7 @@ import DropDown from '../components/Dropdown';
 import { connect } from 'react-redux';
 
 const Statistics = (props) => {
-	const url = 'http://localhost:3000';
+	const url = 'https://cors-anywhere.herokuapp.com/https://sentiment-tweet-api.herokuapp.com/';
 
 	const [ tweets, setTweets ] = useState([ {}, {}, {}, {}, {}, {}, {}, {}, {} ]);
 	const [ loading, setLoading ] = useState(false);
@@ -43,7 +43,7 @@ const Statistics = (props) => {
 			className="stats"
 		>
 			{loading ? (
-				<div className="loading"><p className="loading-text">Loading...this may take up to a minute</p></div>
+				<div className="loading"><p className="loading-text">Loading...this may take up to  a minute</p></div>
 			) : (
 				<Stream tweets={tweets} acc={props.selectedCeleb} />
 			)}

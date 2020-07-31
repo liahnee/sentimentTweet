@@ -6,6 +6,8 @@ import { Form, Icon, Input } from 'semantic-ui-react';
 import LoggedInHOC from '../HOC/LoggedInHOC';
 import Modal from '../components_profile/resultModal';
 
+const url = 'https://cors-anywhere.herokuapp.com/https://sentiment-tweet-api.herokuapp.com/';
+
 class Profile extends Component {
 	constructor(props) {
 		super(props);
@@ -21,7 +23,6 @@ class Profile extends Component {
 
 	handleChange = (e, key) => {
 		let val = e.target.value;
-		console.log(e);
 		this.setState({
 		  [key]: val
 		});
@@ -29,13 +30,14 @@ class Profile extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		const { name, username, password, new_password } = this.state;
-		console.log('handleSubmit');
-		fetch(`http://localhost:3000/users/${this.props.id}`, {
+		console.log("checking new_password", new_password)
+		fetch(url + `users/${this.props.id}`, {
 		  method: "PATCH",
 		  headers: {
 		    "Content-Type": "application/json",
 		    Accept: "application/json",
-		    credentials: 'include'
+			credentials: 'include',
+			Authorization: 'Bearer ' + localStorage.st_token
 		  },
 		  body: JSON.stringify({ name, username, password, new_password})
 		})
@@ -71,7 +73,7 @@ class Profile extends Component {
 						<p className="username">{this.state.username}</p>
 						Please enter your current password and any other field you would like to change.
 						<Form onSubmit={(e) => this.handleSubmit(e)}>
-							<Form.Field onChange={(e) => this.handleChange(e, "newname")}>
+							<Form.Field onChange={(e) => this.handleChange(e, "name")}>
 								<label className="profile-label">New Name:</label>
 								<input className="input" placeholder={this.props.name} />
 							</Form.Field>

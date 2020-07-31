@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import FullDropdown from '../components/Dropdown';
 
-const url = 'http://localhost:3000';
+const url = 'https://cors-anywhere.herokuapp.com/https://sentiment-tweet-api.herokuapp.com/';
 
 const Home = (props) => {
 	const [ tweets, setTweets ] = useState([ {}, {}, {}, {}, {}, {}, {}, {}, {} ]);
